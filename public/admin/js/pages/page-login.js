@@ -12,11 +12,19 @@ function login_callback(data){
 			}
 		},1500);
 	}else{
+		console.log(data);
 		switch(data.info){
 			case -2:
+				console.log('dsfaaaaaaaaaa');
 
-			$(".modal-title").html("用户名必须以字母开头的4-12位的字母数字组合");
-			$('#finish-button') .modal('show');
+                layui.use('layer', function(){
+                    var layer = layui.layer;
+
+                    layer.msg('hello',{icon: 5});
+                });
+
+                // $(".modal-title").html("用户名必须以字母开头的4-12位的字母数字组合");
+			// $('#finish-button') .modal('show');
 			break;
 			case -4:
 			$(".modal-title").html("密码错误");

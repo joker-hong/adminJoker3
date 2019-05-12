@@ -1,7 +1,7 @@
 /* TYPE YOUR JAVA SCRIPT HERE */
 // var head_url='https://dev170.weibanker.cn/hongjh/www/jinfeng/';
 // var head_url='http://localhost/jinfeng/';
-var head_url='';
+var head_url='http://www.adminjoker.com/';
 var blur=true;
 function form_input_check(ts){
 	var value=ts.val();
@@ -132,6 +132,7 @@ $("input").blur(function(){
         var f=$(this).attr('callback');
         var nead_confirm=false;
         var check = $(this).attr('check-data');
+        console.log($(this).attr('url'));
         if( (target = $(this).attr('href')) || (target = $(this).attr('url')) || ($(this).attr('type')=='submit')){
             form = $('.'+target_form);
 

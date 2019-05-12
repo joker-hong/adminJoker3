@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/admin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/admin/css/admin.css" media="all">
     <link rel="stylesheet" href="/admin/css/login.css" media="all">
+    <link rel="stylesheet" href="/admin/css/bootstrap.min.css" media="all">
 </head>
 <body>
 
@@ -19,7 +20,9 @@
             <h2>AdminJoker</h2>
             <p>There's magic, it brought us together, and that magic is called hope.</p>
         </div>
-        <from method="post"  class="myform">
+        @include('flash::message')
+        <form method="post"  class="myform" action="{{route('submit')}}">
+            {{csrf_field()}}
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
@@ -47,7 +50,7 @@
                 <a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>
             </div>
             <div class="layui-form-item">
-                <button type="submit" class="layui-btn layui-btn-fluid ajax-post" lay-submit lay-filter="LAY-user-login-submit" herf="{{route('submit')}}" target-form="myform" callback="login_callback">登 入</button>
+                <button type="submit" class="layui-btn layui-btn-fluid" >登 入</button>
             </div>
             <div class="layui-trans layui-form-item layadmin-user-login-other">
                 <label>社交账号登入</label>
@@ -58,19 +61,20 @@
                 <a href="reg.html" class="layadmin-user-jump-change layadmin-link">注册帐号</a>
             </div>
         </div>
-        </from>
+        </form>
     </div>
 
 
 </div>
-
-<script src="/admin/layui/layui.js"></script>
-<script src="/admin/js/pages/page-login.js"></script>
-<script src="/admin/js/pages/public/ajax.js"></script>
 <script src="/admin/js/pages/public/jquery.min.js"></script>
 <script src="/admin/js/pages/public/jquery-2.1.1.min.js"></script>
 <script src="/admin/js/pages/public/jquery-migrate-1.2.1.min.js"></script>
 <script src="/admin/js/pages/public/jquery.mmenu.min.js"></script>
+<script src="/admin/js/bootstrap.min.js"></script>
+<script src="/admin/layui/layui.js"></script>
+<script src="/admin/js/pages/public/ajax.js"></script>
+<script src="/admin/js/pages/page-login.js"></script>
+
 
 </body>
 </html>

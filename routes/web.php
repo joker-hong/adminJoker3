@@ -16,6 +16,9 @@ Route::group(['namespace'=>'admin'],function(){
     Route::get('login','LoginController@index')->name('login');
     //验证登陆提交
     Route::post('login/submit','LoginController@submit')->name('submit');
+    //首页
+    Route::get('main','IndexController@main')->name('main');
+
 
 
 });
