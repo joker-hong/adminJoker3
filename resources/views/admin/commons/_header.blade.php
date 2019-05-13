@@ -53,18 +53,12 @@
                 <cite>{{$admin->username}}</cite>
             </a>
             <dl class="layui-nav-child">
-                <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                <dd><a lay-href="{{route('myInfo')}}">基本资料</a></dd>
+                <dd><a lay-href="{{route('password')}}">修改密码</a></dd>
                 <hr>
-                <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                <dd style="text-align: center;"><a href="{{route('logout')}}">退出</a></dd>
             </dl>
         </li>
 
-        <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
-        </li>
-        <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
-            <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
-        </li>
     </ul>
 </div>

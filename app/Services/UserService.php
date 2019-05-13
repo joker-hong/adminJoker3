@@ -10,6 +10,8 @@ namespace App\Services;
 
 use Auth;
 use App\Services\LogService;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -45,6 +47,64 @@ class UserService
         $this->logService->create($request,true,2);
 
         return true;
+    }
+
+    /**
+     * 退出登录
+     *
+     * @return mixed
+     */
+    public function logout()
+    {
+        Auth::guard('web')->user()->clearRuleAndMenu();
+        return Auth::guard('web')->logout();
+    }
+
+    /**
+     * 获取个人信息
+     *
+     * @parem  int   $id
+     * @return array
+     */
+    public function ById($id)
+    {
+        return User::find($id);
+    }
+
+    /**
+     * 更新个人信息
+     *
+     * @parem  int   $id
+     * @return array
+     */
+    public function update($request,$id)
+    {
+        $data = $request->all();
+        $admin = $this->ById($id);
+
+        if(isset($data['password'])){
+            $data['password'] = Hash::make($data['password']);
+        }else{
+            unset($data['password']);
+        }
+
+        $admin->update($data);
+        if (isset($request->role_id)) {
+            //更新关联表数据
+            $admin->roles()->sync($request->role_id);
+        }
+        return $admin;
+    }
+
+    /**
+     * 根据搜索条件获取用户
+     *
+     * @parem  array   $condition
+     * @return array
+     */
+    public function lists($condition)
+    {
+        return User::with('roles')->where($condition)->latest('update_at')->paginate('10');
     }
 
 }

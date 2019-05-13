@@ -45,4 +45,16 @@ class LoginController extends Controller
 
         return view('admin.index.index');
     }
+
+    /**
+     * 退出登录
+     *
+     * @access public
+     * @return boolean
+     */
+    public function logout()
+    {
+        $this->userService->logout();
+        return redirect()->route('login');
+    }
 }
