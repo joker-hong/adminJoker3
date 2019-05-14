@@ -104,7 +104,7 @@ class UserService
      */
     public function lists($condition)
     {
-        return User::with('roles')->where($condition)->latest('update_at')->paginate('10');
+        return User::with('roles')->where($condition)->latest('updated_at')->paginate('10');
     }
 
 }

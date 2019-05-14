@@ -19,7 +19,7 @@
                             <dl class="layui-nav-child">
                                 @foreach($rule['children'] as $k=>$item)
                                 <dd data-name="console" class="layui-this">
-                                    <a lay-href="">{{$item['name']}}</a>
+                                    <a lay-href="{{route($item['route'])}}">{{$item['name']}}</a>
                                 </dd>
                                 @endforeach
                             </dl>
@@ -27,7 +27,7 @@
                     </li>
                 @else
                     <li data-name="home" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="{{$rule['name']}}" lay-direction="2" lay-href="">
+                        <a href="javascript:;" lay-tips="{{$rule['name']}}" lay-direction="2" lay-href="{{route($rule['route'])}}">
                             <i class="layui-icon layui-icon-{{$rule['fonts']}}"></i>
                             <cite>{{$rule['name']}}2</cite>
                         </a>

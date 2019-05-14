@@ -13,7 +13,7 @@ use App\Models\Role;
 class RoleService
 {
     /**
-     * 获取个人信息
+     * 获取角色信息
      *
      * @parem  int   $id
      * @return array
@@ -21,5 +21,16 @@ class RoleService
     public function ById($id)
     {
         return Role::find($id);
+    }
+
+    /**
+     * 获取所有角色信息
+     *
+     * @parem  int   $id
+     * @return array
+     */
+    public function get()
+    {
+        return Role::get();
     }
 }

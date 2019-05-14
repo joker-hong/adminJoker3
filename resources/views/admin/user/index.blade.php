@@ -4,6 +4,7 @@
         <div class="layui-card">
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <form method="get" action="{{route('user')}}">
+                    {!! csrf_field() !!}
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">登录名</label>
@@ -12,7 +13,7 @@
                         </div>
                     </div>
                     <div class="layui-inline">
-                        <button class="layui-btn layuiadmin-btn-admin" lay-submit type="submit">
+                        <button class="layui-btn layuiadmin-btn-admin" type="submit">
                             <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
                         </button>
                     </div>
@@ -22,28 +23,60 @@
 
             <div class="layui-card-body">
                 <div style="padding-bottom: 10px;">
-                    <button class="layui-btn layuiadmin-btn-admin" data-type="batchdel">删除</button>
-                    <button class="layui-btn layuiadmin-btn-admin" data-type="add">添加</button>
+                    <a href="{{route('user.create')}}" class="layui-btn layuiadmin-btn-admin" >添加</a>
                 </div>
 
-                <table id="LAY-user-back-manage" lay-filter="LAY-user-back-manage">
+                <table class="layui-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>管理员账号</th>
+                        <th>所在角色组</th>
+                        <th>最后登录时间</th>
+                        <th>注册时间</th>
+                        <th>登录次数</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($lists as $k => $item)
 
+                        <tr>
+                            <td class="text-center">{{$item->id}}</td>
+                            <td>{{$item->username}}</td>
+                            <td>
+                                @foreach($item->roles as $role)
+                                    {{$role->name}}
+                                @endforeach
+                            </td>
+                            <td class="text-center">{{$item->created_at->diffForHumans()}}</td>
+                            <td class="text-center">{{$item->created_at->diffForHumans()}}</td>
+                            <td class="text-center">{{$item->login_count}}</td>
+                            <td class="text-center">
+                                @if($item->status == 1)
+                                    <span class="layui-btn layui-btn-xs">正常</span>
+                                @elseif($item->status == 2)
+                                    <span class="layui-btn layui-btn-primary layui-btn-xs">锁定</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <a href="{{route('user.edit',$item->id)}}">
+                                        <button class="btn btn-primary btn-xs" type="button"><i class="fa fa-paste"></i> 修改</button>
+                                    </a>
+                                    {{--@if($item->status == 2)--}}
+                                        {{--<a href="{{route('user.status',['status'=>1,'id'=>$item->id])}}"><button class="btn btn-info btn-xs" type="button"><i class="fa fa-warning"></i> 恢复</button></a>--}}
+                                    {{--@else--}}
+                                        {{--<a href="{{route('user.status',['status'=>2,'id'=>$item->id])}}"><button class="btn btn-warning btn-xs" type="button"><i class="fa fa-warning"></i> 禁用</button></a>--}}
+                                    {{--@endif--}}
+                                    {{--<a href="{{route('user.delete',$item->id)}}"><button class="btn btn-danger btn-xs" type="button"><i class="fa fa-trash-o"></i> 删除</button></a>--}}
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
                 </table>
-                <script type="text/html" id="buttonTpl">
-                    {{#  if(d.check == true){ }}
-                    <button class="layui-btn layui-btn-xs">已审核</button>
-                    {{#  } else { }}
-                    <button class="layui-btn layui-btn-primary layui-btn-xs">未审核</button>
-                    {{#  } }}
-                </script>
-                <script type="text/html" id="table-useradmin-admin">
-                    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
-                    {{#  if(d.role == '超级管理员'){ }}
-                    <a class="layui-btn layui-btn-disabled layui-btn-xs"><i class="layui-icon layui-icon-delete"></i>删除</a>
-                    {{#  } else { }}
-                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
-                    {{#  } }}
-                </script>
             </div>
         </div>
     </div>
@@ -55,81 +88,7 @@
         }).extend({
             index: 'lib/index' //主入口模块
         }).use(['index', 'useradmin', 'table'], function(){
-            var $ = layui.$
-                ,form = layui.form
-                ,table = layui.table;
 
-            //监听搜索
-            form.on('submit(LAY-user-back-search)', function(data){
-                var field = data.field;
-
-                //执行重载
-                table.reload('LAY-user-back-manage', {
-                    where: field
-                });
-            });
-
-            //事件
-            var active = {
-                batchdel: function(){
-                    var checkStatus = table.checkStatus('LAY-user-back-manage')
-                        ,checkData = checkStatus.data; //得到选中的数据
-
-                    if(checkData.length === 0){
-                        return layer.msg('请选择数据');
-                    }
-
-                    layer.prompt({
-                        formType: 1
-                        ,title: '敏感操作，请验证口令'
-                    }, function(value, index){
-                        layer.close(index);
-
-                        layer.confirm('确定删除吗？', function(index) {
-
-                            //执行 Ajax 后重载
-                            /*
-                            admin.req({
-                              url: 'xxx'
-                              //,……
-                            });
-                            */
-                            table.reload('LAY-user-back-manage');
-                            layer.msg('已删除');
-                        });
-                    });
-                }
-                ,add: function(){
-                    layer.open({
-                        type: 2
-                        ,title: '添加管理员'
-                        ,content: 'adminform.html'
-                        ,area: ['420px', '420px']
-                        ,btn: ['确定', '取消']
-                        ,yes: function(index, layero){
-                            var iframeWindow = window['layui-layer-iframe'+ index]
-                                ,submitID = 'LAY-user-back-submit'
-                                ,submit = layero.find('iframe').contents().find('#'+ submitID);
-
-                            //监听提交
-                            iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
-                                var field = data.field; //获取提交的字段
-
-                                //提交 Ajax 成功后，静态更新表格中的数据
-                                //$.ajax({});
-                                table.reload('LAY-user-front-submit'); //数据刷新
-                                layer.close(index); //关闭弹层
-                            });
-
-                            submit.trigger('click');
-                        }
-                    });
-                }
-            }
-            $('.layui-btn.layuiadmin-btn-admin').on('click', function(){
-                var type = $(this).data('type');
-                active[type] ? active[type].call(this) : '';
-            });
         });
     </script>
 @endsection
