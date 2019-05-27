@@ -8,8 +8,8 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="/admin/admin_joker/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="/admin/admin_joker/style/admin.css" media="all">
+    <link rel="stylesheet" href="/admin/adminJoker3/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/admin/adminJoker3/style/admin.css" media="all">
 
 </head>
 <body class="layui-layout-body">
@@ -54,11 +54,11 @@
     </div>
 </div>
 
-<script src="/admin/admin_joker/layui/layui.js"></script>
+<script src="/admin/adminJoker3/layui/layui.js"></script>
 
 <script>
     layui.config({
-        base: "/admin/admin_joker/" //静态资源所在路径
+        base: '/admin/adminJoker3/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
     }).use('index');
@@ -74,6 +74,7 @@
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+
 </body>
 </html>
 

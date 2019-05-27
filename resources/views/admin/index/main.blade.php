@@ -297,7 +297,13 @@
         </div>
     </div>
     </div>
-
-    <script src="/admin/js/layui.js"></script>
-
+@endsection
+@section('js')
+    <script>
+        layui.config({
+            base: '/admin/adminJoker3/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use(['index', 'sample']);
+    </script>
 @endsection

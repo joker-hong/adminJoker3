@@ -4,7 +4,7 @@
         <div class="layui-card">
             <div class="layui-form layui-card-header layuiadmin-card-header-auto">
                 <form method="get" action="{{route('user')}}">
-                    {!! csrf_field() !!}
+                        {!! csrf_field() !!}
                 <div class="layui-form-item">
                     <div class="layui-inline">
                         <label class="layui-form-label">登录名</label>
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <script src="/admin/admin_joker/layui/layui.js"></script>
+    <script src="/admin/adminJoker3/layui/layui.js"></script>
     <script>
         layui.config({
             base: '/admin/admin_joker/' //静态资源所在路径

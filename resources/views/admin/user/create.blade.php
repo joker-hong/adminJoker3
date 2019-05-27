@@ -233,10 +233,11 @@
             </div>
         </div>
     </div>
-    <script src="/admin/admin_joker/layui/layui.js"></script>
+@endsection
+@section('js')
     <script>
         layui.config({
-            base: '/admin/admin_joker/' //静态资源所在路径
+            base: '/admin/adminJoker3/' //静态资源所在路径
         }).extend({
             index: 'lib/index' //主入口模块
         }).use(['index', 'form', 'laydate'], function(){

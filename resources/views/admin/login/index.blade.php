@@ -6,9 +6,9 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="/admin/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="/admin/css/admin.css" media="all">
-    <link rel="stylesheet" href="/admin/css/login.css" media="all">
+    <link rel="stylesheet" href="/admin/adminJoker3/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/admin/adminJoker3/style/admin.css" media="all">
+    <link rel="stylesheet" href="/admin/adminJoker3/style/login.css" media="all">
     <link rel="stylesheet" href="/admin/css/bootstrap.min.css" media="all">
 </head>
 <body>
@@ -71,7 +71,7 @@
 <script src="/admin/js/pages/public/jquery-migrate-1.2.1.min.js"></script>
 <script src="/admin/js/pages/public/jquery.mmenu.min.js"></script>
 <script src="/admin/js/bootstrap.min.js"></script>
-<script src="/admin/layui/layui.js"></script>
+<script src="/admin/adminJoker3/layui/layui.js"></script>
 <script src="/admin/js/pages/public/ajax.js"></script>
 <script src="/admin/js/pages/page-login.js"></script>
 
